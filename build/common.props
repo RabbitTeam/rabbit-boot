@@ -1,0 +1,26 @@
+<Project ToolsVersion="15.0">
+  <Import Project="version.props" />
+
+  <PropertyGroup Label="Source Link">
+    <ProjectParentDirectory>$([System.IO.Path]::GetDirectoryName('$(MSBuildProjectDirectory)'))</ProjectParentDirectory>
+    <ProjectParentDirectoryName>$([System.IO.Path]::GetFileName('$(ProjectParentDirectory)'))</ProjectParentDirectoryName>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build">
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <Product>Rabbit Boot</Product>
+    <RepositoryUrl>https://github.com/RabbitTeam/rabbit-boot</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>Rabbit Boot for .NET Core.</Description>
+    <Copyright>Copyright (c) 2018 RabbitTeam. All rights reserved.</Copyright>
+    <Authors>majian</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    
+    <PackageIconUrl>http://www.rabbithub.com/icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/RabbitTeam/rabbit-boot</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+  </PropertyGroup>
+</Project>
