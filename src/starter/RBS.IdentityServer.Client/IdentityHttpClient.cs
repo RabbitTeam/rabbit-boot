@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Rabbit.Boot.Starter.IdentityServer.Client
 {
-    public class IdentityServerHttpClientHandler : HttpClientHandler
+    public class IdentityHttpClientHandler : HttpClientHandler
     {
         private readonly IdentityAccessTokenAccessor _accessTokenAccessor;
 
-        public IdentityServerHttpClientHandler(IOptions<ClientOptions> optionsAccessor)
+        public IdentityHttpClientHandler(IOptions<IdentityClientOptions> optionsAccessor)
         {
-            _accessTokenAccessor = new IdentityAccessTokenAccessor(optionsAccessor.Value.Identity);
+            _accessTokenAccessor = new IdentityAccessTokenAccessor(optionsAccessor.Value);
         }
 
         #region Overrides of HttpMessageHandler
@@ -30,11 +30,13 @@ namespace Rabbit.Boot.Starter.IdentityServer.Client
         #endregion Overrides of HttpMessageHandler
     }
 
-    public class IdentityServerHttpClient : HttpClient
+    public class IdentityHttpClient : HttpClient
     {
-        public IdentityServerHttpClient(IOptions<ClientOptions> optionsAccessor, IdentityServerHttpClientHandler httpClientHandler) : base(httpClientHandler)
+        public IdentityHttpClient(IOptions<IdentityClientOptions> optionsAccessor, IdentityHttpClientHandler httpClientHandler) : base(httpClientHandler)
         {
-            BaseAddress = new Uri(optionsAccessor.Value.Url);
+            var baseUrl = optionsAccessor.Value.BaseUrl;
+            if (!string.IsNullOrWhiteSpace(baseUrl))
+                BaseAddress = new Uri(baseUrl);
         }
     }
 }

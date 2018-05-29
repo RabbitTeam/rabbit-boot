@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 
 [assembly: HostingStartup(typeof(RedisHostingStartup))]
-[assembly: HostingStartup(typeof(IdentityServerClientHostingStartup))]
+[assembly: HostingStartup(typeof(IdentityClientHostingStartup))]
 
 namespace ConsoleApp
 {
@@ -48,7 +48,7 @@ namespace ConsoleApp
                 Console.WriteLine(redisFactory.Default());
                 Console.WriteLine(services.GetService<IConnectionMultiplexer>());
 
-                var httpClient = services.GetService<IdentityServerHttpClient>();
+                var httpClient = services.GetService<IdentityHttpClient>();
 
                 Console.WriteLine(httpClient.GetStringAsync("/wechat/accesstoken/wxxxx").GetAwaiter().GetResult());
             }

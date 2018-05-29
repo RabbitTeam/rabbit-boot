@@ -52,13 +52,13 @@ namespace Rabbit.Boot.Starter.IdentityServer.Client.Internal
     internal class IdentityAccessTokenAccessor : AccessTokenAccessor
     {
         private readonly HttpClient _httpClient;
-        private readonly IdentityOptions _options;
+        private readonly IdentityClientOptions _options;
 
-        public IdentityAccessTokenAccessor(IdentityOptions options) : this(options, new HttpClient())
+        public IdentityAccessTokenAccessor(IdentityClientOptions options) : this(options, new HttpClient())
         {
         }
 
-        public IdentityAccessTokenAccessor(IdentityOptions options, HttpClient httpClient)
+        public IdentityAccessTokenAccessor(IdentityClientOptions options, HttpClient httpClient)
         {
             _httpClient = httpClient;
             _options = options;
@@ -69,7 +69,7 @@ namespace Rabbit.Boot.Starter.IdentityServer.Client.Internal
         /// <inheritdoc/>
         protected override async Task<string> RequestAccessTokenAsync()
         {
-            var baseUrl = _options.Url;
+            var baseUrl = _options.IdentityUrl;
             var clientId = _options.ClientId;
             var clientSecret = _options.ClientSecret;
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Rabbit.Boot.Starter.IdentityServer.Client
 {
-    public class IdentityServerClientHostingStartup : IHostingStartup
+    public class IdentityClientHostingStartup : IHostingStartup
     {
         #region Implementation of IHostingStartup
 
@@ -12,11 +12,11 @@ namespace Rabbit.Boot.Starter.IdentityServer.Client
         {
             builder.ConfigureServices((context, services) =>
             {
-                var configuration = context.Configuration.GetSection("Client");
+                var configuration = context.Configuration.GetSection("Rabbit:IdentityClient");
                 services
-                    .Configure<ClientOptions>(configuration)
-                    .AddSingleton<IdentityServerHttpClientHandler>()
-                    .AddSingleton<IdentityServerHttpClient>();
+                    .Configure<IdentityClientOptions>(configuration)
+                    .AddSingleton<IdentityHttpClientHandler>()
+                    .AddSingleton<IdentityHttpClient>();
             });
         }
 

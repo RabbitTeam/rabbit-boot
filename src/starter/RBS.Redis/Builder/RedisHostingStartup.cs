@@ -12,7 +12,7 @@ namespace Rabbit.Boot.Starter.Redis
         {
             builder.ConfigureServices((context, services) =>
             {
-                var redisConfiguration = context.Configuration.GetSection("Redis");
+                var redisConfiguration = context.Configuration.GetSection("Rabbit:Redis");
                 services
                     .Configure<RedisOptions>(redisConfiguration)
                     .AddRedisFactory()
